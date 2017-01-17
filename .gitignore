@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/visualstudio,visualstudiocode,windows
 
+src/ProductCatalogWeb/wwwroot/lib
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
