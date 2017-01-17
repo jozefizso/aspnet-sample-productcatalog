@@ -11,10 +11,8 @@ namespace ProductCatalogWeb.Controllers
     {
         public IActionResult Index()
         {
-            var data = new TrainingProductManager();
-
             var model = new ProductViewModel();
-            model.TrainingProducts = data.Get();
+            model.BindData();
 
             return View(model);
         }
@@ -22,13 +20,16 @@ namespace ProductCatalogWeb.Controllers
         [HttpPost]
         public IActionResult Index(ProductViewModel inputModel)
         {
-            var data = new TrainingProductManager();
+            if (inputModel.EventCommand == "add")
+            {
+                inputModel.EnableDetailView();
+            }
+            else
+            {
+                inputModel.BindData();
+            }
 
-            var model = new ProductViewModel();
-            model.SearchProductName = inputModel.SearchProductName;
-            model.TrainingProducts = data.FilterByProductName(inputModel.SearchProductName);
-
-            return View(model);
+            return View(inputModel);
         }
 
         public IActionResult Error()

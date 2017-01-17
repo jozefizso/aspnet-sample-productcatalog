@@ -6,50 +6,83 @@
 
 @using (Html.BeginForm())
 {
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h1 class="panel-title">Search For Products</h1>
-    </div>
-    <div class="panel-body">
-      <div class="form-group">
-        <label asp-for="SearchProductName">Product Name</label>
-        <input asp-for="SearchProductName" type="text" class="form-control">
+  <input asp-for="EventCommand" type="hidden">
+
+  if (Model.IsSearchAreaVisible)
+  {
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title">Search For Products</h1>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label asp-for="SearchProductName">Product Name</label>
+          <input asp-for="SearchProductName" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button id="btnSearch" class="btn btn-sm btn-primary">
+          <i class="glyphicon glyphicon-search"></i> Search
+        </button>
+        <button id="btnReset" class="btn btn-sm btn-default">
+          <i class="glyphicon glyphicon-share-alt"></i> Reset
+        </button>
+        <button id="btnAdd" class="btn btn-sm btn-default" data-event-command="add">
+          <i class="glyphicon glyphicon-plus-sign"></i> Add
+        </button>
       </div>
     </div>
-    <div class="panel-footer">
-      <button id="btnSearch" class="btn btn-sm btn-primary">
-        <i class="glyphicon glyphicon-search"></i> Search
-      </button>
-      <button id="btnReset" class="btn btn-sm">
-        <i class="glyphicon glyphicon-share-alt"></i> Reset
-      </button>
-    </div>
-  </div>
+  }
 
-  <div class="table-responsive">
-    <table class="table table-condensed table-bordered table-striped table-hover">
-      <thead>
+  if (Model.IsDetailAreaVisible)
+  {
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title">Product Information</h1>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          TODO: Product Details View.
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button id="btnSave" class="btn btn-sm btn-primary" data-event-command="">
+          <i class="glyphicon glyphicon-floppy-disk"></i> Save
+        </button>
+        <button id="btnReset" class="btn btn-sm btn-default" data-event-command="">
+          <i class="glyphicon glyphicon-remove-circle"></i> Close
+        </button>
+      </div>
+    </div>
+  }
+
+  if (Model.IsListAreaVisible)
+  {
+    <div class="table-responsive">
+      <table class="table table-condensed table-bordered table-striped table-hover">
+        <thead>
         <tr>
           <th>Product Name</th>
           <th>Introduction Date</th>
           <th>Url</th>
           <th>Price</th>
         </tr>
-      </thead>
-      <tbody>
-        @foreach (var product in Model.TrainingProducts)
-        {
-          <tr>
-            <td>@product.ProductName</td>
-            <td>@product.IntroductionDate</td>
-            <td>@product.Url</td>
-            <td>@product.Price.ToString("c")</td>
-          </tr>
-        }
+        </thead>
+        <tbody>
+          @foreach (var product in Model.TrainingProducts)
+          {
+            <tr>
+              <td>@product.ProductName</td>
+              <td>@product.IntroductionDate</td>
+              <td>@product.Url</td>
+              <td>@product.Price.ToString("c")</td>
+            </tr>
+          }
 
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+  }
 }
 
 @section scripts {
@@ -57,6 +90,15 @@
     $(function() {
       $('#btnReset').on('click', function (e) {
         $('#SearchProductName').val('');
+      });
+
+      $('[data-event-command]').on('click', function (e) {
+        e.preventDefault();
+
+        var cmd = $(this).data('event-command');
+        $('#EventCommand').val(cmd);
+
+        $('form').submit();
       });
     });
   </script>
