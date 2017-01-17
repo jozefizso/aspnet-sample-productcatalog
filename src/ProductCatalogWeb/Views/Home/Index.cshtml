@@ -21,10 +21,10 @@
         </div>
       </div>
       <div class="panel-footer">
-        <button id="btnSearch" class="btn btn-sm btn-primary">
+        <button id="btnSearch" class="btn btn-sm btn-primary" data-event-command="search">
           <i class="glyphicon glyphicon-search"></i> Search
         </button>
-        <button id="btnReset" class="btn btn-sm btn-default">
+        <button id="btnReset" class="btn btn-sm btn-default" data-event-command="resetsearch">
           <i class="glyphicon glyphicon-share-alt"></i> Reset
         </button>
         <button id="btnAdd" class="btn btn-sm btn-default" data-event-command="add">
@@ -46,10 +46,12 @@
         </div>
       </div>
       <div class="panel-footer">
-        <button id="btnSave" class="btn btn-sm btn-primary" data-event-command="">
+        <button id="btnSave" class="btn btn-sm btn-success" data-event-command="">
           <i class="glyphicon glyphicon-floppy-disk"></i> Save
         </button>
-        <button id="btnReset" class="btn btn-sm btn-default" data-event-command="">
+        <button id="btnReset" class="btn btn-sm btn-default"
+                formnovalidate
+                data-event-command="cancel">
           <i class="glyphicon glyphicon-remove-circle"></i> Close
         </button>
       </div>
@@ -88,10 +90,6 @@
 @section scripts {
   <script>
     $(function() {
-      $('#btnReset').on('click', function (e) {
-        $('#SearchProductName').val('');
-      });
-
       $('[data-event-command]').on('click', function (e) {
         e.preventDefault();
 

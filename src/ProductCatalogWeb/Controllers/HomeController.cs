@@ -20,14 +20,8 @@ namespace ProductCatalogWeb.Controllers
         [HttpPost]
         public IActionResult Index(ProductViewModel inputModel)
         {
-            if (inputModel.EventCommand == "add")
-            {
-                inputModel.EnableDetailView();
-            }
-            else
-            {
-                inputModel.BindData();
-            }
+            inputModel.BindData();
+            ModelState.Clear();
 
             return View(inputModel);
         }

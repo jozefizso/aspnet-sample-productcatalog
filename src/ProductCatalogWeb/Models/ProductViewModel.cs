@@ -9,9 +9,8 @@ namespace ProductCatalogWeb.Models
     {
         public ProductViewModel()
         {
-            this.IsSearchAreaVisible = true;
-            this.IsListAreaVisible = true;
-            this.IsDetailAreaVisible = false;
+            this.EventCommand = "list";
+            this.EnableListView();
         }
 
         public string EventCommand { get; set; }
@@ -26,6 +25,13 @@ namespace ProductCatalogWeb.Models
 
         public bool IsSearchAreaVisible { get; set; }
 
+        public void EnableListView()
+        {
+            this.IsSearchAreaVisible = true;
+            this.IsListAreaVisible = true;
+            this.IsDetailAreaVisible = false;
+        }
+
         public void EnableDetailView()
         {
             this.IsSearchAreaVisible = false;
@@ -37,7 +43,27 @@ namespace ProductCatalogWeb.Models
         {
             var data = new TrainingProductManager();
 
-            this.TrainingProducts = data.FilterByProductName(this.SearchProductName);
+            switch (this.EventCommand?.ToLower())
+            {
+                case "search":
+                    this.TrainingProducts = data.FilterByProductName(this.SearchProductName);
+                    break;
+
+                case "add":
+                    EnableDetailView();
+                    break;
+
+                case "resetsearch":
+                    this.SearchProductName = "";
+                    goto default;
+
+                case "list":
+                case "cancel":
+                default:
+                    EnableListView();
+                    this.TrainingProducts = data.Get();
+                    break;
+            }
         }
     }
 }
