@@ -1,4 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Product Catalog";
+﻿@model ProductViewModel
+
+@{
+  ViewData["Title"] = "Product Catalog";
 }
 
+@using (Html.BeginForm())
+{
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h1 class="panel-title">Search For Products</h1>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label asp-for="SearchProductName">Product Name</label>
+        <input asp-for="SearchProductName" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button id="btnSearch" class="btn btn-sm btn-primary">Search</button>
+      <button id="btnReset" class="btn btn-sm">Reset</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-condensed table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Introduction Date</th>
+          <th>Url</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+
+    </table>
+  </div>
+}
+
+@section scripts {
+  <script>
+    
+  </script>
+}
