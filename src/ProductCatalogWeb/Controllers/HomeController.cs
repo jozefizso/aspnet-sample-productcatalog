@@ -19,6 +19,18 @@ namespace ProductCatalogWeb.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Index(ProductViewModel inputModel)
+        {
+            var data = new TrainingProductManager();
+
+            var model = new ProductViewModel();
+            model.SearchProductName = inputModel.SearchProductName;
+            model.TrainingProducts = data.FilterByProductName(inputModel.SearchProductName);
+
+            return View(model);
+        }
+
         public IActionResult Error()
         {
             return View();

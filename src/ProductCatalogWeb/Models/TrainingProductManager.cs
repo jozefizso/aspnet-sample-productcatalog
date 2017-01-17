@@ -27,5 +27,17 @@ namespace ProductCatalogWeb.Models
 
             return data;
         }
+
+        public List<TrainingProduct> FilterByProductName(string inputModelSearchProductName)
+        {
+            var data = this.CreateMockData();
+
+            if (!String.IsNullOrEmpty(inputModelSearchProductName))
+            {
+                data = data.Where(p => p.ProductName.ToLower().StartsWith(inputModelSearchProductName.ToLower())).ToList();
+            }
+
+            return data;
+        }
     }
 }
