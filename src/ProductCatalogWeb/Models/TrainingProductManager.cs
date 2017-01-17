@@ -24,6 +24,22 @@ namespace ProductCatalogWeb.Models
                 Url = "https://bit.ly/lSNzc0i",
                 Price = 29
             });
+            data.Add(new TrainingProduct
+            {
+                ProductId = 2,
+                ProductName = "ASP.NET MVC 5",
+                IntroductionDate = new DateTime(2016, 07, 5),
+                Url = "https://bit.ly/ku4mJJd",
+                Price = 59
+            });
+            data.Add(new TrainingProduct
+            {
+                ProductId = 3,
+                ProductName = "Angular 2",
+                IntroductionDate = new DateTime(2016, 03, 18),
+                Url = "https://bit.ly/arN54J",
+                Price = 29
+            });
 
             return data;
         }
