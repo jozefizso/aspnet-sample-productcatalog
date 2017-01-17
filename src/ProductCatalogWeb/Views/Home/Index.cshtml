@@ -32,7 +32,18 @@
           <th>Price</th>
         </tr>
       </thead>
+      <tbody>
+        @foreach (var product in Model.TrainingProducts)
+        {
+          <tr>
+            <td>@product.ProductName</td>
+            <td>@product.IntroductionDate</td>
+            <td>@product.Url</td>
+            <td>@product.Price.ToString("c")</td>
+          </tr>
+        }
 
+      </tbody>
     </table>
   </div>
 }

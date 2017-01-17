@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ProductCatalogWeb.Models;
 
 namespace ProductCatalogWeb.Controllers
 {
@@ -10,7 +11,12 @@ namespace ProductCatalogWeb.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var data = new TrainingProductManager();
+
+            var model = new ProductViewModel();
+            model.TrainingProducts = data.Get();
+
+            return View(model);
         }
 
         public IActionResult Error()
